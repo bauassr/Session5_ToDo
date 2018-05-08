@@ -17,7 +17,16 @@ out = df.to_json(orient='columns')
 with open('file.json', 'w') as f:
     f.write(out)
 # reading the JSON data 
+# reading the JSON data 
 train_phase = pd.read_json('file.json',orient='columns',dtype=True)
+train_phase = train_phase[['survived', 'pclass', 'name', 'sex', 'age', 'sibsp', 'parch', 'ticket','fare', 'cabin', 'embarked']]
+train_phase = train_phase.sort_index()
+
+campare =(df[:5]!=train_phase[:5]).any(1)
+print(df[:5])
+print(train_phase[:5])
+print(campare)
+
 
 HtmlFile = pd.read_html('http://vincentarelbundock.github.io/Rdatasets/datasets.html',skiprows=1)[0]
 Html_dataframe = pd.DataFrame(HtmlFile)
